@@ -7,7 +7,7 @@ angular.module('ifome')
 
         $scope.salvaProduto = function () {
             salvarProduto.save($scope.object);
-            Materialize.toast('Produto Salvo com sucesso!', 1500, 'rounded toast-success');
+            Materialize.toast('Produto Salvo com sucesso!', 1400, 'rounded toast-success');
 
             $scope.object = {};
 

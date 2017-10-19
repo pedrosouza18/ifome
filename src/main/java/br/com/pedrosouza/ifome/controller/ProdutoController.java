@@ -42,13 +42,13 @@ public class ProdutoController {
     repository.save(produto);
   }
 
+  @RequestMapping(value = "{id}", method = RequestMethod.GET)
+  public Produto buscarProduto(@PathVariable("id") Long id){
+    return repository.findOne(id);
+  }
+
   @RequestMapping(value = "{id}/editar" , method = RequestMethod.PUT)
-  @ResponseStatus(value = HttpStatus.NO_CONTENT)
-  public void update(@PathVariable("id") Long id, Produto produto){
-    if(produto.getPedidos() != null && !produto.getPedidos().isEmpty()){
-      throw new RuntimeException("Não é possível atualizar o produto!\nProduto associado a um pedido!");
-    } else {
+  public void update(@PathVariable("id") Long id, @RequestBody Produto produto){
       repository.save(produto);
-    }
   }
 }

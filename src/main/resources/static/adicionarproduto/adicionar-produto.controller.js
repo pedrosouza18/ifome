@@ -1,5 +1,5 @@
 angular.module('ifome.adicionarProduto')
-    .controller('AdicionarProdutoCtrl', ['$scope', 'salvarProduto', '$state', '$routeParams', 'atualizarProduto', function($scope, salvarProduto, $state, $routeParams, atualizarProduto) {
+    .controller('AdicionarProdutoCtrl', ['$scope', 'salvarProduto', '$state', '$stateParams', 'atualizarProduto', 'buscarProduto', function($scope, salvarProduto, $state, $stateParams, atualizarProduto, buscarProduto) {
 
         $scope.object = {};
 
@@ -11,18 +11,32 @@ angular.module('ifome.adicionarProduto')
             $state.go('listarpedidos');
         }
 
-        console.log($routeParams.produtoId);
-        /*if($routeParams.produtoId)
-            atualizarProduto.get({produtoId: $routeParams.produtoId})*/
+
+        if($stateParams.produtoId) {
+            buscarProduto.get({produtoId: $stateParams.produtoId})
+                .$promise.then(function (data) {
+                    $scope.object = angular.copy(data);
+            })
+                .catch(function (response) {
+                    console.log(response);
+                });
+        }
 
         $scope.salvaProduto = function () {
-            salvarProduto.save($scope.object);
-            Materialize.toast('Produto Salvo com sucesso!', 1400, 'rounded toast-success');
 
-            $scope.object = {};
+            if($stateParams.produtoId){
+                atualizarProduto.update({produtoId: $stateParams.produtoId}, $scope.object);
+                Materialize.toast('Produto Alterado com sucesso!', 1400, 'rounded toast-success');
 
-            setTimeout(function () {
-                $state.go('listar');
-            }, 1400);
+                setTimeout(function () {
+                    $state.go('listar');
+                }, 1400);
+
+            } else {
+                salvarProduto.save($scope.object);
+                Materialize.toast('Produto Salvo com sucesso!', 1400, 'rounded toast-success');
+
+                $scope.object = {};
+            }
         }
     }]);

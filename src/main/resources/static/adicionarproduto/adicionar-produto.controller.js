@@ -37,6 +37,10 @@ angular.module('ifome.adicionarProduto')
                 Materialize.toast('Produto Salvo com sucesso!', 1400, 'rounded toast-success');
 
                 $scope.object = {};
+
+                setTimeout(function () {
+                    $state.go('listar');
+                }, 1400);
             }
         }
     }]);

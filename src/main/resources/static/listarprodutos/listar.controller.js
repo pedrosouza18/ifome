@@ -15,7 +15,7 @@ angular.module('ifome.listarProduto')
         }
 
         $scope.editarProduto = function (id) {
-            console.log($state.go('editarproduto', {produtoId: id}));
+            $state.go('editarproduto', {produtoId: id});
         }
 
 		function mostraProdutos() {

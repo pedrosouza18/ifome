@@ -1,10 +1,23 @@
-angular.module('ifome')
-	.controller('ListarCtrl', ['$scope', 'buscaProdutos', 'salvarPedido', 'excluirProduto', function($scope, buscaProdutos, salvarPedido, excluirProduto) {
+angular.module('ifome.listarProduto')
+	.controller('ListarCtrl', ['$scope', 'buscaProdutos', 'salvarPedido', 'excluirProduto', '$state', function($scope, buscaProdutos, salvarPedido, excluirProduto, $state) {
 
 		$scope.listResult = [];
 
 		$scope.progresso = false;
 		$scope.btnSalvar = true;
+
+		$scope.listarPedidos = function () {
+            $state.go('listarpedidos');
+        }
+
+        $scope.adicionarProduto = function () {
+            $state.go('adicionarproduto');
+        }
+
+        $scope.editarProduto = function (id) {
+		    console.log(id);
+            console.log($state.go('adicionarproduto', {produtoId: id}));
+        }
 
 		function mostraProdutos() {
             buscaProdutos.query()
@@ -41,6 +54,8 @@ angular.module('ifome')
 				}
 			});
 		};
+
+
 
 
         $scope.salvarPedidoFeito = function () {

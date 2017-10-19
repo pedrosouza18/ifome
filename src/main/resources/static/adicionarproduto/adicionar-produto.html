@@ -1,0 +1,33 @@
+<div class="col s12" ng-controller="AdicionarProdutoCtrl">
+    <div class="grey lighten-5">
+        <a class="waves-effect waves-light btn red lighten-1 m-10" ng-click="listarProdutos()"><i class="material-icons left">list</i>Listar produtos</a>
+        <a class="waves-effect waves-light btn red lighten-1 m-10" ng-click="listarPedidos()"><i class="material-icons left">list</i>Listar pedidos</a>
+    </div>
+    <div class="row padding-card m10">
+        <div class="col s12 m12">
+            <div class="card white padding-card">
+                <div class="row">
+                    <form class="col s12" name="form">
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input placeholder="Nome do produto..." id="nome" type="text" class="validate" ng-model="object.nome">
+                                <label for="nome">Nome</label>
+                            </div>
+                            <div class="input-field col s4">
+                                <input id="loja" type="text" class="validate" ng-model="object.loja">
+                                <label for="loja">Loja</label>
+                            </div>
+                            <div class="input-field col s2">
+                                <input id="preco" type="number" step="any" class="validate" ng-model="object.preco">
+                                <label for="preco">Preço</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="grey lighten-5" style="margin-top: -30px;">
+                    <a class="waves-effect waves-light btn red lighten-1 m-10" ng-disabled="form.$invalid" ng-click="salvaProduto()">Salvar produto</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

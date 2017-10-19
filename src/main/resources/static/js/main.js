@@ -1,10 +1,13 @@
-angular.module('ifome', ['ui.router', 'ngResource' , 'Servicos'])
+var app = angular.module("ifome", ['ui.router', 'ngResource', 'ifome.listarProduto', 'ifome.listarPedido', 'ifome.adicionarProduto']);
 
-    .config(function ($stateProvider) {
+    app.config(function ($locationProvider, $urlRouterProvider) {
 
-        $stateProvider
-            .state('ifome', {
-            url: '/',
-            template: '<h3>hello world!</h3>'
-        });
-    });
+        $urlRouterProvider
+            .when('/listar-produtos', '/', '','/404', '/error' , ['$state', function ($state) {
+                $state.go('listar');
+            }])
+            .otherwise('/');
+
+        $locationProvider.html5Mode(true);
+
+    })

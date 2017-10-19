@@ -41,4 +41,14 @@ public class ProdutoController {
   public void create(@RequestBody Produto produto){
     repository.save(produto);
   }
+
+  @RequestMapping(value = "{id}/editar" , method = RequestMethod.PUT)
+  @ResponseStatus(value = HttpStatus.NO_CONTENT)
+  public void update(@PathVariable("id") Long id, Produto produto){
+    if(produto.getPedidos() != null && !produto.getPedidos().isEmpty()){
+      throw new RuntimeException("Não é possível atualizar o produto!\nProduto associado a um pedido!");
+    } else {
+      repository.save(produto);
+    }
+  }
 }

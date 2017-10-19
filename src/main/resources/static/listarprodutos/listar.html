@@ -1,0 +1,58 @@
+<div class="col s12" ng-controller="ListarCtrl">
+    <div class="grey lighten-5">
+        <a class="waves-effect waves-light btn red lighten-1 m-10" ng-click="listarPedidos()"><i class="material-icons left">list</i>Listar pedidos</a>
+        <a class="waves-effect waves-light btn red lighten-1 m-10" ng-click="adicionarProduto()">Cadastrar produto</a>
+    </div>
+    <div class="row padding-card m10">
+        <div class="col s12 m12">
+            <div class="card white padding-card" ng-if="progresso">
+                <p class="center-align">Salvando pedido ...</p>
+                <div class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+            <div class="card white darken-1">
+                <div class="card-content white-text">
+                    <table class="bordered">
+                        <thead id="tabela-faculdade">
+                        <tr class="red lighten-1">
+                            <th width="10">Selecionar</th>
+                            <th>Nome</th>
+                            <th>Loja</th>
+                            <th width="100">Preço</th>
+                            <th width="100" class="center-align">Opções</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-if="listResult.length == 0">
+                            <td colspan="5" class="center-align"><b>Não há produtos cadastrados.</b></td>
+                        </tr>
+                        <tr ng-if="listResult.length > 0" ng-repeat="item in listResult" ng-class="{'grey lighten-2': item.adicionar}">
+                            <td style="text-align: center">
+                                <input id="check-adiciona" type="checkbox" ng-model="item.adicionar" ng-change="montaPedido(item.id)" style="position: relative; opacity: 1; pointer-events: all;">
+                            </td>
+                            <td>{{item.nome}}</td>
+                            <td>{{item.loja}}</td>
+                            <td>{{item.preco | currency:"R$"}}</td>
+                            <td class="center-align">
+                                <a class="btn-floating tooltipped" data-position="bottom" data-delay="30" data-tooltip="Excluir produto" ng-click="excluirProduto(item.id)"><i class="material-icons">remove_shopping_cart</i></a>
+                                <a class="btn-floating blue darken-1" ng-click="editarProduto(item.id)"><i class="material-icons">border_color</i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        <tfoot class="grey lighten-1 tfoot-pedidos">
+                        <tr class="tfoot-total">
+                            <td colspan="3" class="right-align">Total:</td>
+                            <td class="id_total">{{total.toFixed(2) | currency:"R$"}}</td>
+                            <td></td>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="row p16 right-align">
+                    <a class="waves-effect red lighten-1 btn" ng-disabled="btnSalvar" id="btn-concluir-pedido" ng-click="salvarPedidoFeito(); Materialize.toast('Pedido realizado com sucesso!', 4000)">Concluir pedido</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

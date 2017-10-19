@@ -1,0 +1,30 @@
+<div class="col s12" ng-controller="ListarPedidosCtrl">
+    <div class="grey lighten-5">
+        <a class="waves-effect waves-light btn red lighten-1 m-10" ng-click="listarProdutos()"><i class="material-icons left">list</i>Listar produtos</a>
+        <a class="waves-effect waves-light btn red lighten-1 m-10" ng-click="adicionarProduto()">Cadastrar produto</a>
+    </div>
+    <div class="row padding-card margin-cards">
+        <div class="col s12 m12">
+            <div class="card white darken-1">
+                <div class="card-content white-text">
+                    <h2 class="titulo-pedidos">Pedidos</h2>
+                    <div class="progress" ng-if="progresso">
+                        <div class="indeterminate"></div>
+                    </div>
+                    <div class="collection">
+                        <a ng-if="listResult.length == 0" href="#!" class="collection-item center-align">Não há pedidos cadastrados.</a>
+                        <a ng-if="listResult.length > 0" href="#!" class="collection-item" ng-repeat="(k, v) in listResult">
+                            Pedido: {{::($index) + 1}}
+                            <div ng-repeat="(k2, v2) in v">
+                                <p ng-repeat="(k3, v3) in v2">
+                                    Item: {{::v3.nome}}&nbsp;-&nbsp;
+                                    Loja: {{::v3.loja}}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

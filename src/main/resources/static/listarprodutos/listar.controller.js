@@ -37,7 +37,7 @@ angular.module('ifome.listarProduto')
 
             $scope.pedido = {itens: []};
 
-			$scope.listResult.forEach(function (produto) {
+			$scope.listResult.map(function (produto) {
                 if(produto.adicionar == true){
                     $scope.pedido.itens.push(produto);
                     if(produto.id == id) {
@@ -46,12 +46,12 @@ angular.module('ifome.listarProduto')
                     }
                 } else if(produto.id == id && produto.adicionar == false){
                     $scope.total = $scope.total - produto.preco;
-				}
+                }
 
-				if($scope.total == 0){
-                	$scope.btnSalvar = true;
-				}
-			});
+                if($scope.total == 0){
+                    $scope.btnSalvar = true;
+                }
+            })
 		};
 
 

@@ -37,22 +37,24 @@ angular.module('ifome.listarProduto')
 
             $scope.pedido = {itens: []};
 
-			$scope.listResult.map(function (produto) {
-                if(produto.adicionar == true){
-                    $scope.pedido.itens.push(produto);
-                    if(produto.id == id) {
-                        $scope.btnSalvar = false;
-                        $scope.total = $scope.total + produto.preco;
-                    }
-                } else if(produto.id == id && produto.adicionar == false){
+            $scope.pedido.itens = $scope.listResult.filter(function(produto){
+                if(produto.id == id) {
+                    $scope.btnSalvar = false;
+                    $scope.total = $scope.total + produto.preco;
+                }
+
+                if(produto.id == id && produto.adicionar == false){
                     $scope.total = $scope.total - produto.preco;
                 }
 
                 if($scope.total == 0){
                     $scope.btnSalvar = true;
                 }
-            })
-		};
+
+                return produto.adicionar;
+            });
+
+        };
 
 
 

@@ -38,12 +38,10 @@ angular.module('ifome.listarProduto')
             $scope.pedido = {itens: []};
 
             $scope.pedido.itens = $scope.listResult.filter(function(produto){
-                if(produto.id == id) {
+                if(produto.adicionar == true && produto.id == id){
                     $scope.btnSalvar = false;
                     $scope.total = $scope.total + produto.preco;
-                }
-
-                if(produto.id == id && produto.adicionar == false){
+                } else if(produto.id == id && produto.adicionar == false){
                     $scope.total = $scope.total - produto.preco;
                 }
 

@@ -1,13 +1,18 @@
-var app = angular.module("ifome", ['ui.router', 'ngResource', 'ifome.listarProduto', 'ifome.listarPedido', 'ifome.adicionarProduto']);
+(function(){
 
-    app.config(function ($locationProvider, $urlRouterProvider) {
+    'use strict';
 
-        $urlRouterProvider
-            .when('/listar-produtos', '/', '','/404', '/error', '/listar-pedidos', 'novo-produto' , ['$state', function ($state) {
-                $state.go('listar');
-            }])
-            .otherwise('/');
+    var app = angular.module("ifome", ['ui.router', 'ngResource', 'ifome.listarProduto', 'ifome.listarPedido', 'ifome.adicionarProduto']);
 
-        $locationProvider.html5Mode(true);
+        app.config(function ($locationProvider, $urlRouterProvider) {
 
-    })
+            $urlRouterProvider
+                .when('/listar-produtos', '/', '','/404', '/error', '/listar-pedidos', 'novo-produto' , ['$state', function ($state) {
+                    $state.go('listar');
+                }])
+                .otherwise('/');
+
+            $locationProvider.html5Mode(true);
+
+        });
+})();

@@ -1,26 +1,31 @@
-var app = angular.module("ifome.listarPedido", []);
+(function(){
 
-app.config(function ($stateProvider) {
+    'use strict';
 
-    var listarStatePedido = {
-        name: 'listarpedidos',
-        url: '/listar-pedidos',
-        templateUrl: 'listarpedidos/listar-pedidos.html',
-        controller: 'ListarPedidosCtrl'
-    }
+    var app = angular.module("ifome.listarPedido", []);
 
-    $stateProvider.state(listarStatePedido);
+    app.config(function ($stateProvider) {
 
-})
-
-app.factory('mostraPedidos', function($resource) {
-
-    return $resource('pedidos', {}, {
-        query : {
-            method: 'GET',
-            isArray: true
+        var listarStatePedido = {
+            name: 'listarpedidos',
+            url: '/listar-pedidos',
+            templateUrl: 'listarpedidos/listar-pedidos.html',
+            controller: 'ListarPedidosCtrl'
         }
+
+        $stateProvider.state(listarStatePedido);
+
+    })
+
+    app.factory('mostraPedidos', function($resource) {
+
+        return $resource('pedidos', {}, {
+            query : {
+                method: 'GET',
+                isArray: true
+            }
+        });
     });
-});
+})();
 
 

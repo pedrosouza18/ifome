@@ -1,42 +1,47 @@
-var app = angular.module("ifome.listarProduto", []);
+(function(){
 
-app.config(function ($stateProvider) {
+    'use strict';
 
-    var listarState = {
-        name: 'listar',
-        url: '/',
-        templateUrl: 'listarprodutos/listar.html',
-        controller: 'ListarCtrl'
-    }
+    var app = angular.module("ifome.listarProduto", []);
 
-    $stateProvider.state(listarState);
+    app.config(function ($stateProvider) {
 
-})
-
-app.factory('buscaProdutos', function($resource) {
-
-    return $resource('produtos', {}, {
-        query : {
-            method: 'GET',
-            isArray: true
+        var listarState = {
+            name: 'listar',
+            url: '/',
+            templateUrl: 'listarprodutos/listar.html',
+            controller: 'ListarCtrl'
         }
+
+        $stateProvider.state(listarState);
+
+    })
+
+    app.factory('buscaProdutos', function($resource) {
+
+        return $resource('produtos', {}, {
+            query : {
+                method: 'GET',
+                isArray: true
+            }
+        });
+    })
+
+    app.factory('salvarPedido', function($resource) {
+
+        return $resource('pedidos', {}, {
+            save : {
+                method: 'POST'
+            }
+        });
+    })
+
+    app.factory('excluirProduto', function($resource) {
+
+        return $resource('produtos/:produtoId', {}, {
+            delete : {
+                method: 'DELETE'
+            }
+        });
     });
-})
-
-app.factory('salvarPedido', function($resource) {
-
-    return $resource('pedidos', {}, {
-        save : {
-            method: 'POST'
-        }
-    });
-})
-
-app.factory('excluirProduto', function($resource) {
-
-    return $resource('produtos/:produtoId', {}, {
-        delete : {
-            method: 'DELETE'
-        }
-    });
-});
+})();

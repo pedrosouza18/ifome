@@ -1,26 +1,31 @@
-angular.module('ifome.listarPedido')
-    .controller('ListarPedidosCtrl', ['$scope', 'mostraPedidos', '$state', function($scope, mostraPedidos, $state) {
+(function(){
 
-        $scope.listResult = [];
+    'use strict';
 
-        $scope.progresso = true;
-        $scope.btnSalvar = true;
+    angular.module('ifome.listarPedido')
+        .controller('ListarPedidosCtrl', ['$scope', 'mostraPedidos', '$state', function($scope, mostraPedidos, $state) {
 
-        $scope.listarProdutos = function () {
-            $state.go('listar');
-        }
+            $scope.listResult = [];
 
-        $scope.adicionarProduto = function () {
-            $state.go('adicionarproduto');
-        }
+            $scope.progresso = true;
+            $scope.btnSalvar = true;
 
-        mostraPedidos.query()
-            .$promise.then(function (data) {
-                $scope.listResult = data;
-                $scope.progresso = false;
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
+            $scope.listarProdutos = function () {
+                $state.go('listar');
+            }
 
-    }]);
+            $scope.adicionarProduto = function () {
+                $state.go('adicionarproduto');
+            }
+
+            mostraPedidos.query()
+                .$promise.then(function (data) {
+                    $scope.listResult = data;
+                    $scope.progresso = false;
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+        }]);
+})();
